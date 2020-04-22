@@ -3,9 +3,11 @@ Based on Java Spring Boot 2.2.6, Hibernate, JDBC, no JPA usage.
 
 
 I use BitPay service as data source: that brings currency rate json data, because rate changes very often.
+
 https://bitpay.com/
 
 BitPay API documentation
+
 https://bitpay.com/api/#rest-api-resources-rates-fetch-the-rates-used-by-bitpay-for-a-specific-cryptocurrency
 
 
