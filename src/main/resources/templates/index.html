@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Test Task of Aleksei Jegorov</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+.container {
+    margin:0 25% 0 25%;
+    width:50%;
+}
+.hiddenItem {
+    display:none;
+}
+</style>
+
+<script>
+    function saveRate() {
+	    window.location.href = document.location.href + '/saveFreshRate?nocache=' + new Date().getTime();
+    }
+    function showLatestRates(limit) {
+	    window.location.href = document.location.href + '/showLatestRates?limit=' + limit + '&nocache=' + new Date().getTime();
+    }
+
+    function saveFreshRate() {
+        jQuery(document).ready(function($){
+
+            var options = {};
+            options.url = '/saveFreshRate?nocache=' + new Date().getTime();
+            options.type = "GET";
+            options.contentType = "application/json; charset=utf-8";
+            options.dataType = "json";
+            //options.data = JSON.stringify(jsondata);
+            options.crossDomain = false;
+            options.beforeSend = function () {
+                document.getElementById('preload').style.display = '';
+            };
+            options.success = function (resp) {
+                data = JSON.stringify(resp);
+                //alert(data);
+                var root_obj = $.parseJSON(data);
+                if (typeof root_obj == 'undefined' || root_obj == null) {
+                    $("#resultRate").html('Error parse json output.');
+                } else {
+                    var status = root_obj.status;
+                    var message = root_obj.message;
+                    //alert(status + '; ' + message);
+
+                    $("#resultRate").html(status);
+                    document.getElementById('preload').style.display = 'none';
+                }
+            };
+            options.error = function () {
+                $("#resultRate").html('Error due to connect to server.');
+                document.getElementById('preload').style.display = 'none';
+            };
+            $.ajax(options);
+        
+        });
+    }
+</script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>BitPay - payment by cryptocurrency</h1>
+        <br />
+        <h3>Current task - get BitPay BTC currency rate.</h3>
+        <br />
+        <button id="saveRate" onclick="saveFreshRate()">save latest rate</button>
+        <img id="preload" src="loading.gif" class="hiddenItem" /> <span id="resultRate"> </span>
+        <br /><br />
+        <button id="showRates" onclick="showLatestRates(10)">Show 10 latest rates in JSON</button>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Error Occurred</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+
+    <div class="container">
+        <h1>Error Occurred.</h1>
+        <div class="alert alert-danger" role="alert">
+            <b>
+            [<span th:text="${status}">status</span>]
+            <span th:text="${error}">error</span>
+            </b>
+            <p th:text="${message}">message</p>
+        </div>
+    </div>
+
+</body>
+</html>
