@@ -33,3 +33,6 @@ Also I have created the Docker file, so it could be open with the command:
 docker load --input apriltask.tar
 
 docker run -p 3333:8080 apriltask
+
+Image Docker file available with this link:
+https://cloud.mail.ru/public/53HD/3cn4cidGW
